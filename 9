@@ -1,0 +1,109 @@
+void move ()
+    {
+        char input;
+        char ending[]="Конец игры";
+        int temp_dir = dir;
+        int speed=300;
+
+        do {
+
+            if (kbhit()) input = getch();// Функция kbhit() возвращает истину, если нажата какая-либо клавиша на клавиатуре.
+            else input = 0;// getch ожидает нажатия клавиши и возвращает её код
+
+            switch (input)
+            {
+                case 'P':
+                    if (dir==DIR_UP)
+                    break;
+                    temp_dir=DIR_DOWN;
+                    break;
+                case 'H':
+                    if (dir==DIR_DOWN)
+                    break;
+                    temp_dir=DIR_UP;
+                    break;
+
+                case 'K':
+                    if (dir==DIR_RIGHT)
+                    break;
+                    temp_dir= DIR_LEFT;
+                    break;
+                case 'M':
+                    if (dir==DIR_LEFT)
+                    break;
+                    temp_dir= DIR_RIGHT;
+                    break;
+                default:
+                    break;
+            }
+
+            dir=temp_dir;
+
+            switch (temp_dir)
+                      {
+                case DIR_RIGHT:
+                    cx[n] = cx[n-1]+1;
+                    cy[n] = cy[n-1];
+                    break;
+                case DIR_LEFT:
+                    cx[n] = cx[n-1]-1;
+                    cy[n] = cy[n-1];
+                    break;
+                case DIR_UP:
+                    cy[n] = cy[n-1]-1;
+                    cx[n] = cx[n-1];
+                    break;
+                case DIR_DOWN:
+                    cy[n] = cy[n-1]+1;
+                    cx[n] = cx[n-1];
+                    break;
+                default:
+                    break;
+            }
+
+            if (edacl())
+                {
+                    gotoxy (cx[n], cy[n]);
+                    cout << "X";
+                    ++n;
+                    speed=speed-10;
+                    food_rand();
+                }
+
+            else
+             {
+                gotoxy (cx[0],cy[0]);
+                cout << ' ';
+
+                for (int i = 0; i < n; i++)
+                {
+                    cx[i] = cx[i+1];
+                    cy[i] = cy[i+1];
+                }
+                gotoxy (cx[n], cy[n]);
+                cout << "X";
+              }
+
+             if(dead())
+                {
+                for (int i=0; i<11; i++)
+                    {
+                        gotoxy (i+18, 7);
+                        cout << ending[i];
+                    }
+
+                break;
+                }
+
+            gotoxy(1,18);
+            cout <<"Score : "<< score <<"\n\n";
+
+            gotoxy(0,22);
+            cout << foodx;
+            gotoxy(0,23);
+            cout << foody;
+            Sleep(speed);
+
+        } while (input!=27); //Esc
+
+    }
