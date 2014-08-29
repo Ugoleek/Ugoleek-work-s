@@ -1,0 +1,17 @@
+void igr_pole ()
+    {
+        for (int m = 0; m <= height; ++m) //2 цикла
+            for (int nw = 0; nw <= width; ++nw)
+                rp[m][nw] = (m == 0 || nw == 0 || m == height || nw == width ? '|' : ' ' );//†
+                    //m равно 0 или
+                n = 2;
+
+        cx[0] = 1;
+        cy[0] = 1;
+        cx[1] = 2;
+        cy[1] = 1;//начальные координаты
+
+        rp[1][1] = '@';
+        rp[1][2] = '@';
+
+    }
