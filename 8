@@ -1,0 +1,17 @@
+bool dead ()
+    {
+        if (cx[n-1]== width)
+            return true;
+        if (cx[n-1] == 0)
+            return true;
+        if (cy[n-1] == height)
+            return true;
+        if (cy[n-1] == 0)
+            return true;
+
+        for (int m = 0; m < n-3; ++m)
+            if (cx[m] == cx[n-1] && cy[m] == cy[n-1])
+            return true;
+
+        return false;
+    }
